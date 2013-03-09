@@ -13,7 +13,7 @@ This module uses child_process.fork() to keep the main process from freezing.
 Installation
 ------------
 Go to your node_modules folder and execute:
-`git clone git://github.com/daniel-j/node-two-phase-algorithm.git`
+`git clone git://github.com/daniel-j/node-two-phase-algorithm.git twophase`
 
 Example
 -------
