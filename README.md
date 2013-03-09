@@ -76,12 +76,11 @@ This loads the algorithm and the tables (if the tables don't exist on disk, it g
 This can take some time, depending on your hardware.
 
 ### twophase.solve(facelets, maxDepth, timeOut, useSeparator, callback)
-This will attempt to calculate a solution of a cube.
-The facelets are the faces of the cube you're trying to solve. A solved cube looks like this:
-UUUUUUUUURRRRRRRRRFFFFFFFFFDDDDDDDDDLLLLLLLLLBBBBBBBBB
+This will attempt to calculate a solution of a cube. The facelets are the faces of the cube you're trying to solve. A solved cube looks like this: `UUUUUUUUURRRRRRRRRFFFFFFFFFDDDDDDDDDLLLLLLLLLBBBBBBBBB`
+
 maxDepth is the maximum moves that the algorithm will go before it gives up.
-timeOut is the maximum time in seconds that the algorithm has to solve the cube in.
-If exceeded, it gives up.
+
+timeOut is the maximum time in seconds that the algorithm has to solve the cube in. If exceeded, it gives up.
 
 ### twophase.randomCube(callback)
 This lets you generate random cubes as facelets data.
