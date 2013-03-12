@@ -74,8 +74,12 @@ var twistMove = CoordCubie.twistMove = [];
 		console.log("Loading twistMove...");
 		var data = fs.readFileSync(filename);
 		for (var i = 0; i < N_TWIST; i++) {
-			twistMove[i] = new Int16Array(data.slice(i*N_MOVE*2, i*N_MOVE*2+N_MOVE*2));
+			twistMove[i] = new Int16Array(N_MOVE);
+			for (var j = 0; j < N_MOVE; j++) {
+				twistMove[i][j] = data.readInt16LE((i*N_MOVE+j)*2);
+			}
 		}
+
 	} else {
 		console.log("Generating twistMove...");
 		for (var i = 0; i < N_TWIST; i++) {
@@ -93,11 +97,13 @@ var twistMove = CoordCubie.twistMove = [];
 				// a
 			}
 		}
-		var data = "";
+		var data = new Buffer(N_TWIST*N_MOVE*2);
 		for (var i = 0; i < N_TWIST; i++) {
-			data += new Buffer(new Uint8Array(twistMove[i].buffer)).toString('binary');
+			for (var j = 0; j < N_MOVE; j++) {
+				data.writeInt16LE(twistMove[i][j], (i*N_MOVE+j)*2);
+			}
 		}
-		fs.writeFileSync(filename, data, 'binary');
+		fs.writeFileSync(filename, data);
 	}
 	
 }());
@@ -114,7 +120,10 @@ var flipMove = CoordCubie.flipMove = [];
 		console.log("Loading flipMove...");
 		var data = fs.readFileSync(filename);
 		for (var i = 0; i < N_FLIP; i++) {
-			flipMove[i] = new Int16Array(data.slice(i*N_MOVE*2, i*N_MOVE*2+N_MOVE*2));
+			flipMove[i] = new Int16Array(N_MOVE);
+			for (var j = 0; j < N_MOVE; j++) {
+				flipMove[i][j] = data.readInt16LE((i*N_MOVE+j)*2);
+			}
 		}
 	} else {
 		console.log("Generating flipMove...");
@@ -134,11 +143,17 @@ var flipMove = CoordCubie.flipMove = [];
 				// a
 			}
 		}
-		var data = "";
+		var data = new Buffer(N_FLIP*N_MOVE*2);
+		for (var i = 0; i < N_FLIP; i++) {
+			for (var j = 0; j < N_MOVE; j++) {
+				data.writeInt16LE(flipMove[i][j], (i*N_MOVE+j)*2);
+			}
+		}
+		/*var data = "";
 		for (var i = 0; i < N_FLIP; i++) {
 			data += new Buffer(new Uint8Array(flipMove[i].buffer)).toString('binary');
-		}
-		fs.writeFileSync(filename, data, 'binary');
+		}*/
+		fs.writeFileSync(filename, data);
 	}
 }());
 
@@ -164,8 +179,14 @@ var FRtoBR_Move = CoordCubie.FRtoBR_Move = [];
 		console.log("Loading FRtoBR_Move...");
 		var data = fs.readFileSync(filename);
 		for (var i = 0; i < N_FRtoBR; i++) {
-			FRtoBR_Move[i] = new Int16Array(data.slice(i*N_MOVE*2, i*N_MOVE*2+N_MOVE*2));
+			FRtoBR_Move[i] = new Int16Array(N_MOVE);
+			for (var j = 0; j < N_MOVE; j++) {
+				FRtoBR_Move[i][j] = data.readInt16LE((i*N_MOVE+j)*2);
+			}
 		}
+		/*for (var i = 0; i < N_FRtoBR; i++) {
+			FRtoBR_Move[i] = new Int16Array(data.slice(i*N_MOVE*2, i*N_MOVE*2+N_MOVE*2));
+		}*/
 	} else {
 		console.log("Generating FRtoBR_Move...");
 		for (var i = 0; i < N_FRtoBR; i++) {
@@ -183,11 +204,17 @@ var FRtoBR_Move = CoordCubie.FRtoBR_Move = [];
 				a.edgeMultiply(CubieCube.moveCube[j]);
 			}
 		}
-		var data = "";
+		var data = new Buffer(N_FRtoBR*N_MOVE*2);
+		for (var i = 0; i < N_FRtoBR; i++) {
+			for (var j = 0; j < N_MOVE; j++) {
+				data.writeInt16LE(FRtoBR_Move[i][j], (i*N_MOVE+j)*2);
+			}
+		}
+		/*var data = "";
 		for (var i = 0; i < N_FRtoBR; i++) {
 			data += new Buffer(new Uint8Array(FRtoBR_Move[i].buffer)).toString('binary');
-		}
-		fs.writeFileSync(filename, data, 'binary');
+		}*/
+		fs.writeFileSync(filename, data);
 	}
 }());
 
